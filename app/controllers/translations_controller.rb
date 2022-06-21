@@ -47,6 +47,6 @@ class TranslationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def translation_params
-      params.require(:translation).permit(:word, :word_id)
+      params.require(:translation).permit(:word, :word_id, :user_id)
     end
 end
