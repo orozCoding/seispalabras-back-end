@@ -1,5 +1,6 @@
 class TranslationsController < ApplicationController
   before_action :set_translation, only: %i[ show update destroy ]
+  before_action :authorize_request
 
   # GET /translations
   def index

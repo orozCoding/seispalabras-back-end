@@ -1,4 +1,9 @@
+require "json_web_token" #<= require the file
+
 class ApplicationController < ActionController::API
+  include JsonWebToken #<= include the module
+
+
   def not_found
     render json: { error: 'not_found' }
   end
