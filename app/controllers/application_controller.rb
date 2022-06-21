@@ -1,7 +1,7 @@
-require "json_web_token" #<= require the file
+require "json_web_token" 
 
 class ApplicationController < ActionController::API
-  include JsonWebToken #<= include the module
+  include JsonWebToken 
 
 
   def not_found

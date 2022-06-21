@@ -49,6 +49,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(
         :name, :role, :email,
         :password, :password_confirmation
-        :question, :answer)
+        )
     end
 end
