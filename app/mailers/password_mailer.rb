@@ -1,4 +1,8 @@
+require 'digest/sha2'
+
 class PasswordMailer < ApplicationMailer
+  default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@orozcoding.dev"
+  default "Subject"=>"Reset your Password in Seis Palabras"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -10,6 +14,6 @@ class PasswordMailer < ApplicationMailer
     
     @token = user.signed_id(purpose: "password_reset", expires_in: 12.hours)
 
-    mail to: user.email
+    mail to: user.email, subject: "Reset your password at SeisPalabras.xyz"
   end
 end
