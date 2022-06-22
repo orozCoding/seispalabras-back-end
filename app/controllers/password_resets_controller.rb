@@ -14,7 +14,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_signed!(params[:token].to_s, purpose: "password_reset")
+    @user = User.find_signed!(params[:token], purpose: "password_reset")
 
     if @user.present?
       render json: @user, status: :ok
@@ -29,6 +29,14 @@ class PasswordResetsController < ApplicationController
 
   def update
     @user = User.find_signed!(params[:token], purpose: "password_reset")
+    if @user.update(password_params)
+      render json: "Password succesfully changed", status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+  render json: "Invalid token", status: :not_acceptable
   end
 
   private
