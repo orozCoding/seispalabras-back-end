@@ -1,12 +1,14 @@
 class TranslationsController < ApplicationController
   before_action :set_translation, only: %i[ show update destroy ]
-  before_action :authorize_request
+  before_action :authorize_request, except: :top
 
   # GET /translations
   def index
-    @translations = Translation.all
+    if @current_user
+      @translations = Translation.all.where(user_id: @current_user.id)
 
-    render json: @translations
+      render json: @translations
+    end
   end
 
   # GET /translations/1
@@ -37,6 +39,19 @@ class TranslationsController < ApplicationController
   # DELETE /translations/1
   def destroy
     @translation.destroy
+  end
+
+  # GET /top
+  def top
+    @users = []
+    @top = Translation.all.group(:user_id).count
+    @top.map do |user|
+      username = User.find(user[0]).username
+      score = user[1]
+      @users << {user: username, score: score}
+    end
+
+    render json: @users
   end
 
   private

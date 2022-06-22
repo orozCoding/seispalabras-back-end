@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  get '/top', to: 'translations#top'
+
   post '/auth/login', to: 'authentication#login'
   
   get 'password/reset', to: 'password_resets#new'
