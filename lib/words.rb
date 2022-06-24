@@ -613,7 +613,7 @@ module Words
     {
       id: 88,
       e: 'record',
-      s: ['registro', 'récord', 'expediente', 'disco', 'historial', 'acta', 'antecedentes'],
+      s: ['registro', 'récord', 'expediente', 'disco', 'historial', 'acta', 'antecedentes', 'grabacion'],
       completed: false,
       active: false,
     },

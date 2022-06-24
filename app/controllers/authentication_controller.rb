@@ -15,7 +15,8 @@ class AuthenticationController < ApplicationController
       time = Time.now + 30.days.to_i if remember == true
       render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
                      name: @user.name,
-                     email: @user.email  }, status: :ok
+                     email: @user.email,
+                     username: @user.username  }, status: :ok
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
     end

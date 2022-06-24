@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@orozcoding.dev"
+  default from: email_address_with_name('notification@orozcoding.dev', 'Seis Palabras')
   layout "mailer"
 end

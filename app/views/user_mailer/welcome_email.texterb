@@ -1,0 +1,8 @@
+Welcome to SeisPalabras.xyz, <%= @user.name %>
+++++++++++++++++++++++++++++++++++++++++++++++
+You have successfully signed up,
+your username is: <%= @user.username %>.
+To login to the site, just follow this link: <%= @url %>.
+Visit seispalabras.xyz every day and practice your Spanish.
+Consistency is the key!
+Thanks for joining and have a great day!
