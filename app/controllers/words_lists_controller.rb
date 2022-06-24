@@ -24,6 +24,11 @@ class WordsListsController < ApplicationController
     end
   end
 
+  def destroy
+    @list = WordList.last
+    @list.destroy
+  end
+
   private
 
   def list_params
