@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'password/reset/edit', to: 'password_resets#edit'
   patch 'password/reset/edit', to: 'password_resets#update'
 
+  get '/session', to: 'sessions#index' 
+
   get '/list', to: 'list#index'
   
   get '/*a', to: 'application#not_found'
