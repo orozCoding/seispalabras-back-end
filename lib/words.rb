@@ -809,7 +809,7 @@ module Words
     {
       id: 116,
       e: 'application',
-      s: ['solicitud', 'apliación', 'uso'],
+      s: ['solicitud', 'aplicación', 'uso'],
       completed: false,
       active: false,
     },

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   get '/session', to: 'sessions#index' 
 
-  get '/list', to: 'list#index'
+  get '/default/list', to: 'list#index'
   
   get '/*a', to: 'application#not_found'
 end
