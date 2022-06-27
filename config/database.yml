@@ -87,4 +87,4 @@ production:
   <<: *default
   database: seispalabras_back_end_production
   username: seispalabras_back_end
-  password: <%= ENV["smtp_password"] %>
+  password: <%= ENV["SEISPALABRAS_BACK_END_DATABASE_PASSWORD"] %>
