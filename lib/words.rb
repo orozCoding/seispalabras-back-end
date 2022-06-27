@@ -508,7 +508,7 @@ module Words
     {
       id: 73,
       e: 'breath',
-      s: ['aliento', 'respiración'],
+      s: ['aliento', 'respiración', 'respiro'],
       completed: false,
       active: false,
     },

@@ -61,20 +61,38 @@ Rails.application.configure do
   
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  config.action_mailer.default_url_options = { host: "localhost:8080" }
-  config.action_mailer.raise_delivery_errors = true
+
+
   
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {
-  #   address:              'smtp.sparkpostmail.com',
-  #   port:                 587,
-  #   domain:               'orozcoding.dev',
-  #   user_name:            'SMTP_Injection',
-  #   password:             'f418481d57b2ba91bfe767f7f8b9e6a92978f936',
-  #   authentication:       'plain',
-  #   enable_starttls_auto: true,
-  # open_timeout:         5,
-  # read_timeout:         5 }
+    #   address:              'smtp.sparkpostmail.com',
+    #   port:                 587,
+    #   domain:               'orozcoding.dev',
+    #   user_name:            'SMTP_Injection',
+    #   password:             ENV["smtp_password"],
+    #   authentication:       'plain',
+    #   enable_starttls_auto: true,
+    # open_timeout:         5,
+    # read_timeout:         5 }
+
+    # config/environments/production.rb
+    
+    # host = 'seispalabras.netlify.app' #replace with your own url
+    # config.action_mailer.default_url_options = { host: host }
+  
+  config.action_mailer.default_url_options = { host: "localhost:8080" }
+  config.action_mailer.raise_delivery_errors = true
+    # SMTP settings for gmail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => 'seispalabrasxyz',
+    :password             => ENV['smtp_password'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 
   
 end

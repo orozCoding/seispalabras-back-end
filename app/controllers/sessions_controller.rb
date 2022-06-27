@@ -6,8 +6,4 @@ class SessionsController < ApplicationController
 
     render json: @user
   end
-
-  def words
-
-
 end

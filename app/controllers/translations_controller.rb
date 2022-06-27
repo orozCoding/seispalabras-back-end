@@ -5,7 +5,7 @@ class TranslationsController < ApplicationController
   # GET /translations
   def index
     if @current_user
-      @translations = Translation.all.where(user_id: @current_user.id)
+      @translations = Translation.all.where(user_id: @current_user.id).order(created_at: :desc)
 
       render json: @translations
     end
