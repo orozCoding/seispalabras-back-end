@@ -865,7 +865,7 @@ module Words
     {
       id: 124,
       e: 'smile',
-      s: ['sonrisa'],
+      s: ['sonrisa', 'risa'],
       completed: false,
       active: false,
     },
