@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
 
   def welcome_email
     @user = params[:user]
-    @url  = 'http://seispalabras.xyz/login'
+    @url  = 'https://seispalabras.xyz/'
     mail(to: email_address_with_name(@user.email, @user.name),
     subject: 'Welcome to My Awesome Site')
   end
