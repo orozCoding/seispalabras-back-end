@@ -8,10 +8,6 @@ This is the Back-end repository built with Ruby on Rails.
 
 [Visit the Front-end repository.](https://github.com/orozCoding/seispalabras)
 
-## Preview
-
-![Preview1](./public/seispalabraspreview.gif)
-
 ## Live Demo
 
 [seispalabras.xyz](https://seispalabras.xyz/)
