@@ -942,7 +942,7 @@ module Words
     {
       id: 135,
       e: 'picture',
-      s: ['imagen', 'foto', 'cuadro', 'dibujo', 'visión'],
+      s: ['imagen', 'foto', 'cuadro', 'dibujo', 'visión', 'fotografía'],
       completed: false,
       active: false,
     },
