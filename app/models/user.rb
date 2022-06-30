@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :translations, depent: :destroy
-  has_many :word_lists, depent: :destroy
+  has_many :translations, dependent: :destroy
+  has_many :word_lists, dependent: :destroy
 
   validates :name, presence: true, format: { without: /\s/, message: "Can't have blank spaces" },
   length: { minimum: 3, maximum: 12 }
