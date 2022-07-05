@@ -9,8 +9,7 @@ class User < ApplicationRecord
   format: { with: /\A[a-zA-Z0-9]+\Z/, message: "No special characters or spaces allowed" },
   length: { minimum: 4, maximum: 12 }
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Use a valid email" }
-  validates :password, presence: true
-  validates :password, confirmation: true
+  validates :password, presence: true, confirmation: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
 
 
