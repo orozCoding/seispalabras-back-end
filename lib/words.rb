@@ -1208,7 +1208,7 @@ module Words
     {
       id: 173,
       e: 'soldier',
-      s: ['solado', 'militar'],
+      s: ['soldado', 'militar'],
       completed: false,
       active: false,
     },
