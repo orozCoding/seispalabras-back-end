@@ -12,7 +12,9 @@ class PasswordMailer < ApplicationMailer
   def reset
     user = params[:user]
     
-    @token = user.signed_id(purpose: "password_reset", expires_in: 12.hours)
+    @token = user.signed_id(purpose: "password_reset", expires_in: 7.days)
+
+    @url = "https://seispalabras.xyz/recover/#{@token}"
 
     mail to: user.email, subject: "Reset your password at SeisPalabras.xyz"
   end
