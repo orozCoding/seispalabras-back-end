@@ -1264,7 +1264,7 @@ module Words
     {
       id: 181,
       e: 'invention',
-      s: ['invento'],
+      s: ['invento', 'invención'],
       completed: false,
       active: false,
     },
