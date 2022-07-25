@@ -886,7 +886,7 @@ module Words
     {
       id: 127,
       e: 'ad',
-      s: ['anuncio', 'aviso', 'publicidad', 'propaganda'],
+      s: ['anuncio', 'aviso', 'publicidad', 'propaganda', 'comercial'],
       completed: false,
       active: false,
     },
