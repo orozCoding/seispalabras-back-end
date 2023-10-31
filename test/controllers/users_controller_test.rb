@@ -20,4 +20,10 @@ class UsersControllerTest < ActionController::TestCase
     get :index, as: :json
     assert_response :success
   end
+
+  test 'should show user' do
+    get :show, as: :json, params: { id: @user }
+    assert_response :success
+    assert_equal @user.name, JSON.parse(response.body)['name']
+  end
 end
