@@ -18,10 +18,3 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-one:
-  word: MyString
-  word_id: 1
-
-two:
-  word: MyString
-  word_id: 1

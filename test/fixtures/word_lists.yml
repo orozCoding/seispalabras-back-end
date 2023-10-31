@@ -16,9 +16,3 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-
-one:
-  list: MyString
-
-two:
-  list: MyString

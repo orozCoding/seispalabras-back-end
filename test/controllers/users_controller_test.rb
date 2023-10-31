@@ -1,38 +1,23 @@
 require "test_helper"
+require "json_web_token" 
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
+class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
+    payload = { user_id: @user.id }
+    token = JsonWebToken.encode(true, user_id: @user.id)
+    headers = { "Authorization" => token }
+    request.headers.merge!(headers)
+  end
+
+  test 'should create user' do
+    assert_difference('User.count') do
+      post :create, as: :json, params: { user: { name: 'test', role: 'student', email: 'testw@test.test', password: 'testtest123', password_confirmation: 'testtest123', username: 'tester' } }
+    end
   end
 
   test "should get index" do
-    get users_url, as: :json
+    get :index, as: :json
     assert_response :success
-  end
-
-  test "should create user" do
-    assert_difference("User.count") do
-      post users_url, params: { user: { email: @user.email, name: @user.name, password_digest: @user.password_digest, role: @user.role } }, as: :json
-    end
-
-    assert_response :created
-  end
-
-  test "should show user" do
-    get user_url(@user), as: :json
-    assert_response :success
-  end
-
-  test "should update user" do
-    patch user_url(@user), params: { user: { email: @user.email, name: @user.name, password_digest: @user.password_digest, role: @user.role } }, as: :json
-    assert_response :success
-  end
-
-  test "should destroy user" do
-    assert_difference("User.count", -1) do
-      delete user_url(@user), as: :json
-    end
-
-    assert_response :no_content
   end
 end

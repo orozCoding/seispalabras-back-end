@@ -51,3 +51,5 @@ end
 gem 'jwt'
 gem 'bcrypt'
 gem 'figaro'
+
+gem "byebug", "~> 11.1", :groups => [:development, :test]
