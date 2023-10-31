@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: seispalabras_back_end_production
-  username: seispalabras_back_end
+  username: orozcoding
   password: <%= ENV["SEISPALABRAS_BACK_END_DATABASE_PASSWORD"] %>
