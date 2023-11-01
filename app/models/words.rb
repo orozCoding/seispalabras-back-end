@@ -15,7 +15,8 @@ class Words
 
   def self.translated_by(user)
     translated_ids = user.translations.pluck(:id)
-    list.select { |word| translated_ids.include?(word[:id]) }
+    arr = list.select { |word| translated_ids.include?(word[:id]) }
+    arr.map { |word| word.except(:translated) } 
   end
 
   def self.list

@@ -51,4 +51,8 @@ class User < ApplicationRecord
       }
     end
   end
+
+  def translated_words
+    Words.translated_by(self)
+  end
 end
