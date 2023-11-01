@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   # Render todays words for user
   get '/words', to: 'users#user_active_word_list'
+  get '/translations', to: 'users#user_translated_words'
 
   # Defines the root path route ("/")
   root "translations#top"

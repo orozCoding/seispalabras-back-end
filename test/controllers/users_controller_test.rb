@@ -29,6 +29,12 @@ class UsersControllerTest < ActionController::TestCase
   test 'render todays words for user' do
     get :user_active_word_list, as: :json
     assert_response :success
-    assert_equal @user.active_words_parsed, JSON.parse(response.body)
+    assert_equal JSON(@user.active_words_parsed), response.body
+  end
+
+  test 'render translated words for user' do
+    get :user_translated_words, as: :json
+    assert_response :success
+    assert_equal JSON(@user.translated_words), response.body
   end
 end

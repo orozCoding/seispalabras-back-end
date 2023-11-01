@@ -44,6 +44,10 @@ class UsersController < ApplicationController
     render json: @current_user.active_words_parsed
   end
 
+  def user_translated_words
+    render json: @current_user.translated_words
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
