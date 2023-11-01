@@ -2,8 +2,8 @@
 #
 
 Rails.application.routes.draw do
-  resources :translations
   resources :users
+  resources :translations
   resources :word_lists
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

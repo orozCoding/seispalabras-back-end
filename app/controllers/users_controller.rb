@@ -1,17 +1,17 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
   before_action :authorize_request, except: :create
 
   # GET /users
   def index
-    @users = User.all if @current_user.role = 'admin'
+    return unless @current_user.role = 'admin'
+    @users = User.all
 
     render json: @users
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @current_user
   end
 
   # POST /users
@@ -28,22 +28,22 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    if @current_user.update(user_params)
+      render json: @current_user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: @current_user.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    @current_user.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = @current_user
     end
 
     # Only allow a list of trusted parameters through.
