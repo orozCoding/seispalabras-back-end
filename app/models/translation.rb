@@ -34,6 +34,16 @@ class Translation < ApplicationRecord
     end
 
     def translate_word_in_user_list
-      old_words = user.active_word_list
+      old_words = user.active_words_parsed
+
+      new_words = old_words.map do |word|
+        if word[:id] == word_id
+          word[:translated] = true
+        end
+
+        word
+      end
+
+      user.word_list.update!(words: new_words)
     end
 end

@@ -32,3 +32,5 @@
 /config/application.yml
 
 .env
+
+.byebug_history

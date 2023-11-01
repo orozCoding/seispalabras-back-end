@@ -29,6 +29,9 @@ class User < ApplicationRecord
     # check if user has a word_list and if it was created today
     if self.word_list && self.word_list.created_at.to_date == Time.now.utc.to_date
       self.word_list.words
+    elsif self.word_list.present?
+      word_list = self.word_list.update!(words: Words.new_list_for(self))
+      word_list.words
     else
       # if not, create a new word_list
       word_list = WordList.create!(user_id: id, words: Words.new_list_for(self))
@@ -44,8 +47,7 @@ class User < ApplicationRecord
         id: parsed_word[:id],
         e: parsed_word[:e],
         s: parsed_word[:s],
-        completed: parsed_word[:completed],
-        active: parsed_word[:active]
+        translated: parsed_word[:translated]
       }
     end
   end
