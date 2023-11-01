@@ -44,6 +44,6 @@ class Translation < ApplicationRecord
         word
       end
 
-      user.word_list.update!(words: new_words)
+      user.reload.word_list.update!(words: new_words)
     end
 end
