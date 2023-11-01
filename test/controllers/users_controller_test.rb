@@ -1,5 +1,4 @@
 require "test_helper"
-require "json_web_token" 
 
 class UsersControllerTest < ActionController::TestCase
   setup do

@@ -33,12 +33,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_154946) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "words_lists", force: :cascade do |t|
+  create_table "word_lists", force: :cascade do |t|
     t.string "words", null: false, array: true
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_words_lists_on_user_id"
+    t.index ["user_id"], name: "index_word_lists_on_user_id"
   end
 
 end

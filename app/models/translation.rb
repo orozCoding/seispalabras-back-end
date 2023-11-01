@@ -18,9 +18,10 @@ class Translation < ApplicationRecord
 
   before_validation { self.used_word = used_word.to_s.downcase.strip }
 
-  validates :used_word, presence: true, uniqueness: { scope: :user_id }
   validates :word_id, presence: true, uniqueness: { scope: :user_id }
   validate :used_word_is_correct_for_word_id
+
+  after_create :translate_word_in_user_list
 
   def word
     Words.list.find { |word_hash| word_hash[:id] == word_id && word_hash[:s].include?(used_word) }
@@ -30,5 +31,9 @@ class Translation < ApplicationRecord
 
     def used_word_is_correct_for_word_id
       errors.add(:used_word, "is not correct or does not match any word in our list of English words") unless word
+    end
+
+    def translate_word_in_user_list
+      old_words = user.active_word_list
     end
 end

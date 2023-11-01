@@ -1,6 +1,6 @@
-class CreateWordsLists < ActiveRecord::Migration[7.0]
+class CreateWordLists < ActiveRecord::Migration[7.0]
   def change
-    create_table :words_lists do |t|
+    create_table :word_lists do |t|
       t.string :words, null: false, array: true
       t.bigint :user_id, null: false
 

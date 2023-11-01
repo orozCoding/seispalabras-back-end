@@ -18,7 +18,7 @@ class TranslationsController < ApplicationController
 
   # POST /translations
   def create
-    @translation = Translation.new(translation_params)
+    @translation = @current_user.translations.new(translation_params)
 
     if @translation.save
       render json: @translation, status: :created, location: @translation
@@ -62,8 +62,6 @@ class TranslationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def translation_params
-      par = params.permit(:word, :word_id)
-      par[:user_id] = @current_user.id
-      par
+      params.require(:translation).permit(:used_word, :word_id)
     end
 end

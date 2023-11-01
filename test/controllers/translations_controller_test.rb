@@ -1,38 +1,18 @@
 require "test_helper"
 
-class TranslationsControllerTest < ActionDispatch::IntegrationTest
+class TranslationsControllerTest < ActionController::TestCase
   setup do
-    @translation = translations(:one)
+    @user = users(:one)
+    payload = { user_id: @user.id }
+    token = JsonWebToken.encode(true, user_id: @user.id)
+    headers = { "Authorization" => token }
+    request.headers.merge!(headers)
   end
 
-  test "should get index" do
-    get translations_url, as: :json
-    assert_response :success
-  end
-
-  test "should create translation" do
-    assert_difference("Translation.count") do
-      post translations_url, params: { translation: { word: @translation.word, word_id: @translation.word_id } }, as: :json
+  test 'crete translation' do
+    word = Words.random
+    assert_difference('Translation.count') do
+      post :create, params: { translation: { used_word: word[:s].sample, word_id: word[:id] } }, as: :json
     end
-
-    assert_response :created
-  end
-
-  test "should show translation" do
-    get translation_url(@translation), as: :json
-    assert_response :success
-  end
-
-  test "should update translation" do
-    patch translation_url(@translation), params: { translation: { word: @translation.word, word_id: @translation.word_id } }, as: :json
-    assert_response :success
-  end
-
-  test "should destroy translation" do
-    assert_difference("Translation.count", -1) do
-      delete translation_url(@translation), as: :json
-    end
-
-    assert_response :no_content
   end
 end

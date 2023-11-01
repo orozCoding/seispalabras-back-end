@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: words_lists
+# Table name: word_lists
 #
 #  id         :bigint           not null, primary key
 #  words      :string           not null, is an Array
@@ -10,8 +10,10 @@
 #
 # Indexes
 #
-#  index_words_lists_on_user_id  (user_id)
+#  index_word_lists_on_user_id  (user_id)
 #
-class WordsList < ApplicationRecord
+class WordList < ApplicationRecord
   belongs_to :user
+
+  validates :words, presence: true
 end

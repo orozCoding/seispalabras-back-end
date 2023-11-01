@@ -1,6 +1,6 @@
 require "test_helper"
 
-class WordsListsControllerTest < ActionDispatch::IntegrationTest
+class WordListsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

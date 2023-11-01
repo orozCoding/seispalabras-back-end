@@ -14,7 +14,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :translations, dependent: :destroy
-  has_many :word_lists, dependent: :destroy
+  has_one :word_list, dependent: :destroy
 
   validates :name, presence: true, format: { without: /\s/, message: "Can't have blank spaces" },
   length: { minimum: 3, maximum: 12 }
@@ -24,4 +24,29 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Use a valid email" }
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  def active_word_list
+    # check if user has a word_list and if it was created today
+    if self.word_list && self.word_list.created_at.to_date == Time.now.utc.to_date
+      self.word_list.words
+    else
+      # if not, create a new word_list
+      word_list = WordList.create!(user_id: id, words: Words.new_list_for(self))
+      word_list.words
+    end
+  end
+
+  def active_words_parsed
+    active_word_list.map do |word|
+      parsed_word = eval(word)
+    
+      {
+        id: parsed_word[:id],
+        e: parsed_word[:e],
+        s: parsed_word[:s],
+        completed: parsed_word[:completed],
+        active: parsed_word[:active]
+      }
+    end
+  end
 end

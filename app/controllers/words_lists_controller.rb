@@ -1,4 +1,4 @@
-class WordsListsController < ApplicationController
+class WordListsController < ApplicationController
   before_action :authorize_request
 
   def index
