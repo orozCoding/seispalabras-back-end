@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :word_lists
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # Render todays words for user
+  get '/words', to: 'users#user_active_word_list'
+
   # Defines the root path route ("/")
   root "translations#top"
 

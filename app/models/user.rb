@@ -25,11 +25,13 @@ class User < ApplicationRecord
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
 
+  after_create :create_word_list
+
   def active_word_list
     # check if user has a word_list and if it was created today
     if self.word_list && self.word_list.created_at.to_date == Time.now.utc.to_date
       self.word_list.words
-    elsif self.word_list.present?
+    elsif self.word_list
       word_list = self.word_list.update!(words: Words.new_list_for(self))
       word_list.words
     else
@@ -54,5 +56,11 @@ class User < ApplicationRecord
 
   def translated_words
     Words.translated_by(self)
+  end
+
+  def create_word_list
+    return unless self.word_list.nil?
+
+    WordList.create!(user_id: id, words: Words.new_list_for(self))
   end
 end

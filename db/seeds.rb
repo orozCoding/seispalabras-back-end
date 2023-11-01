@@ -9,4 +9,6 @@
 user = User.first || User.create(name: 'Angel', username: 'angel', role: 'Admin', 
 email: 'ad@min.com', password: "321321", password_confirmation: "321321")
 
-user.translations.create!(used_word: 'ayuda', word_id: 32)
+WordList.create!(user: user, words: Words.new_list_for(user))
+
+user.translations.create!(used_word: 'ayuda', word_id: 32) if user

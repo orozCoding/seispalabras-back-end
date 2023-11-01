@@ -1,5 +1,5 @@
 class TranslationsController < ApplicationController
-  before_action :set_translation, only: %i[ show update destroy ]
+  before_action :find_translation, only: %i[ show update destroy ]
   before_action :authorize_request, except: :top
 
   # GET /translations
@@ -56,7 +56,7 @@ class TranslationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_translation
+    def find_translation
       @translation = Translation.find(params[:id])
     end
 

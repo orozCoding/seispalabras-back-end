@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     @current_user.destroy
   end
 
+  def user_active_word_list
+    render json: @current_user.active_words_parsed
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
