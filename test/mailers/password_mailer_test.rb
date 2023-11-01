@@ -2,7 +2,7 @@ require "test_helper"
 
 class PasswordMailerTest < ActionMailer::TestCase
   test "reset" do
-    mail = PasswordMailer.reset
+    mail = PasswordMailer.with(user: users(:one)).reset
     assert_equal "Reset", mail.subject
     assert_equal ["to@example.org"], mail.to
     assert_equal ["from@example.com"], mail.from
