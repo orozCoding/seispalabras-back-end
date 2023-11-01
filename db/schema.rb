@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_22_155032) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_22_154946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "translations", force: :cascade do |t|
-    t.string "word", null: false
+    t.string "used_word", null: false
     t.integer "word_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_translations_on_user_id"
   end
 
@@ -33,14 +33,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_155032) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "word_lists", force: :cascade do |t|
-    t.string "list", null: false
+  create_table "words_lists", force: :cascade do |t|
+    t.string "words", null: false, array: true
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_word_lists_on_user_id"
+    t.index ["user_id"], name: "index_words_lists_on_user_id"
   end
 
-  add_foreign_key "translations", "users"
-  add_foreign_key "word_lists", "users"
 end

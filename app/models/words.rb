@@ -1,7 +1,24 @@
-module Words
+class Words
+  def self.random
+    list.sample
+  end
+
+  def self.random_list(number_for_words = 6)
+    list.sample(number_for_words)
+  end
+
+  def self.new_list_for(user)
+    translated_ids = user.translations.pluck(:id)
+    list.select { |word| !translated_ids.include?(word[:id]) }.sample(6)
+  end
+
+  def self.translated_by(user)
+    translated_ids = user.translations.pluck(:id)
+    list.select { |word| translated_ids.include?(word[:id]) }
+  end
 
   def self.list
-    words = [{
+    [{
       id: 1,
       e: 'car',
       s: ['auto', 'carro', 'coche'],

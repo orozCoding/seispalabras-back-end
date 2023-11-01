@@ -2,7 +2,7 @@ class WordsListsController < ApplicationController
   before_action :authorize_request
 
   def index
-    @list = WordList.where(user_id: @current_user.id).last
+    @list = @current_user.word_lists.last
 
     render json: @list
   end
