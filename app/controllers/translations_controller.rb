@@ -43,15 +43,8 @@ class TranslationsController < ApplicationController
 
   # GET /top
   def top
-    @users = []
-    @top = Translation.all.group(:user_id).count
-    @top.map do |user|
-      username = User.find(user[0]).username
-      score = user[1]
-      @users << {user: username, score: score}
-    end
-
-    render json: @users
+    @top_users = User.joins(:translations).group(:id).order('COUNT(translations.id) DESC').limit(10)
+    render json: @top_users
   end
 
   private

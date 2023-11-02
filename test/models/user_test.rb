@@ -6,7 +6,6 @@
 #  email           :string           not null
 #  name            :string           not null
 #  password_digest :string
-#  role            :string           default("student")
 #  username        :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

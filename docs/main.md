@@ -20,3 +20,15 @@ In the application controller authorize_request we use the module to decode the 
 
 - Translation
 
+
+
+## Authorization
+
+We are using JWT for authorization
+
+When user logs in via API we return User hash including a Token like
+eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3MDE0ODU4ODR9.XaixWtZdW307VBZKyjP-9-ruMsZf0BU5uf9ylKNOhzg
+
+Then most of the calls to the API needs to have in the headers an Authorization key with the value of the token
+
+That will be used to authorize the user and set the @current_user variable

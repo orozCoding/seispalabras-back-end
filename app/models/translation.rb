@@ -18,7 +18,7 @@ class Translation < ApplicationRecord
 
   before_validation { self.used_word = used_word.to_s.downcase.strip }
 
-  validates :word_id, presence: true, uniqueness: { scope: :user_id }
+  validates :word_id, presence: true, uniqueness: { scope: :user_id, message: "has already been translated" }
   validate :used_word_is_correct_for_word_id
 
   after_create :translate_word_in_user_list

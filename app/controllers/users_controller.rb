@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    return unless @current_user.role = 'admin'
+    return unless @current_user.super_admin?
     @users = User.all
 
     render json: @users
@@ -11,7 +11,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @current_user
+    return unless @current_user.super_admin?
+    render json: User.find(params[:id])
   end
 
   # POST /users

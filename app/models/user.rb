@@ -6,12 +6,16 @@
 #  email           :string           not null
 #  name            :string           not null
 #  password_digest :string
-#  role            :string           default("student")
 #  username        :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
+  SUPER_ADMIN_EMAILS = [
+    'angel.orozco7@gmail.com',
+    'orozcoding@gmail.com',
+  ]
+
   has_secure_password
   has_many :translations, dependent: :destroy
   has_one :word_list, dependent: :destroy
@@ -62,5 +66,20 @@ class User < ApplicationRecord
     return unless self.word_list.nil?
 
     WordList.create!(user_id: id, words: Words.new_list_for(self))
+  end
+
+  def super_admin?
+    SUPER_ADMIN_EMAILS.include?(email)
+  end
+
+  def translations_count
+    translations.count
+  end
+
+  def as_json(options = {})
+    super(options.merge({ 
+      except: [:password_digest],
+      methods: [:translations_count]
+      }))
   end
 end
