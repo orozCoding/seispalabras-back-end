@@ -2,6 +2,7 @@ require "json_web_token"
 
 class ApplicationController < ActionController::API
   include JsonWebToken 
+  before_action :include_default_response_headers
 
 
   def not_found
@@ -19,5 +20,10 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
+  end
+
+  def include_default_response_headers
+    return unless response && response.headers
+    response.set_header('Access-Control-Allow-Origin', '*')
   end
 end

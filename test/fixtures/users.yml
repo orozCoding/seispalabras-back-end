@@ -16,3 +16,9 @@ one:
   username: johndoe
   email: jon@test.test
   password_digest: <%= BCrypt::Password.create('password') %>
+
+super_admin:
+  name: Super Admin
+  username: superadmin
+  email: angel.orozco7@gmail.com
+  password_digest: <%= BCrypt::Password.create('password') %>

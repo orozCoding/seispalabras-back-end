@@ -2,7 +2,7 @@ require "test_helper"
 
 class UsersControllerTest < ActionController::TestCase
   setup do
-    @user = users(:one)
+    @user = users(:super_admin)
     payload = { user_id: @user.id }
     token = JsonWebToken.encode(true, user_id: @user.id)
     headers = { "Authorization" => token }
@@ -11,7 +11,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test 'should create user' do
     assert_difference('User.count') do
-      post :create, as: :json, params: { user: { name: 'test', role: 'student', email: 'testw@test.test', password: 'testtest123', password_confirmation: 'testtest123', username: 'tester' } }
+      post :create, as: :json, params: { user: { name: 'test', email: 'testw@test.test', password: 'testtest123', password_confirmation: 'testtest123', username: 'tester' } }
     end
   end
 
