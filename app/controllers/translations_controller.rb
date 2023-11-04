@@ -5,15 +5,10 @@ class TranslationsController < ApplicationController
   # GET /translations
   def index
     if @current_user
-      @translations = Translation.where(user_id: @current_user.id).order(created_at: :desc)
+      @translations = @current_user.translated_words
 
       render json: @translations
     end
-  end
-
-  # GET /translations/1
-  def show
-    render json: @translation
   end
 
   # POST /translations
@@ -25,20 +20,6 @@ class TranslationsController < ApplicationController
     else
       render json: @translation.errors, status: :unprocessable_entity
     end
-  end
-
-  # PATCH/PUT /translations/1
-  def update
-    if @translation.update(translation_params)
-      render json: @translation
-    else
-      render json: @translation.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /translations/1
-  def destroy
-    @translation.destroy
   end
 
   # GET /top
