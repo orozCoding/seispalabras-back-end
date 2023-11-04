@@ -20,7 +20,7 @@ class WordList < ApplicationRecord
   # check if the words have a correct translated true/false value
   # by checking if the word is translated by the user
   def resync_translated_words
-    old_words = user.active_words_parsed
+    old_words = words.map { |word| eval(word) }
 
     new_words = old_words.map do |word|
       word[:translated] = Translation.exists?(user_id: user.id, word_id: word[:id])
