@@ -60,6 +60,7 @@ class User < ApplicationRecord
   def translated_words
     translations.map do |translation|
       {
+        word: translation.word[:e],
         word_id: translation.word[:id],
         used_word: translation.used_word,
         alternative_answers: translation.alternative_answers
