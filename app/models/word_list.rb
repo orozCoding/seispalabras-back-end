@@ -27,7 +27,7 @@ class WordList < ApplicationRecord
       word
     end
 
-    update!(words: new_words)
+    update!(words: new_words) if old_words != new_words
     self
   end
 end
