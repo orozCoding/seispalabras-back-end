@@ -36,8 +36,8 @@ class User < ApplicationRecord
     if self.word_list && self.word_list.created_at.to_date == Time.now.utc.to_date
       self.word_list.words
     elsif self.word_list
-      word_list = self.word_list.update!(words: Words.new_list_for(self))
-      word_list.words
+      self.word_list.update!(words: Words.new_list_for(self))
+      self.word_list.words
     else
       # if not, create a new word_list
       word_list = WordList.new(user_id: id, words: Words.new_list_for(self))
