@@ -40,7 +40,8 @@ class User < ApplicationRecord
       word_list.words
     else
       # if not, create a new word_list
-      word_list = WordList.create!(user_id: id, words: Words.new_list_for(self))
+      word_list = WordList.new(user_id: id, words: Words.new_list_for(self))
+      word_list.save!
       word_list.words
     end
   end
@@ -48,7 +49,6 @@ class User < ApplicationRecord
   def active_words_parsed
     active_word_list.map do |word|
       parsed_word = eval(word)
-    
       {
         id: parsed_word[:id],
         e: parsed_word[:e],
