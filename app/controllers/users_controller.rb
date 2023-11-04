@@ -46,6 +46,7 @@ class UsersController < ApplicationController
   end
 
   def user_translated_words
+    Rails.logger.info @current_user.translated_words
     render json: @current_user.translated_words
   end
 
