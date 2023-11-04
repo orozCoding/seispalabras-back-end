@@ -23,11 +23,11 @@ class WordList < ApplicationRecord
     old_words = words.map { |word| eval(word) }
 
     new_words = old_words.map do |word|
-      word[:translated] = Translation.exists?(user_id: user.id, word_id: word[:id])
+      word[:translated] = Translation.find_by(user_id: user_id, word_id: word[:id]).present?
       word
     end
 
-    update!(words: new_words) if old_words != new_words
+    self.update!(words: new_words)
     self
   end
 end
