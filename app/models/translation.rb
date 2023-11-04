@@ -21,7 +21,8 @@ class Translation < ApplicationRecord
   validates :word_id, presence: true, uniqueness: { scope: :user_id, message: "has already been translated" }
   validate :used_word_is_correct_for_word_id
 
-  after_create :translate_word_in_user_list
+  after_create :resync_user_active_word_list
+  before_destroy :resync_user_active_word_list
 
   def word
     Words.list.find { |word_hash| word_hash[:id] == word_id && remove_accent_from_array(word_hash[:s]).include?(remove_accent(used_word)) }
@@ -38,18 +39,8 @@ class Translation < ApplicationRecord
       errors.add(:used_word, "is not correct or does not match any word in our list of English words") unless word
     end
 
-    def translate_word_in_user_list
-      old_words = user.active_words_parsed
-
-      new_words = old_words.map do |word|
-        if word[:id] == word_id
-          word[:translated] = true
-        end
-
-        word
-      end
-
-      user.reload.word_list.update!(words: new_words)
+    def resync_user_active_word_list
+      user.word_list.resync_translated_words
     end
 
     # remove accent marks from a word (á, é, í, ó, ú)

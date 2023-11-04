@@ -16,4 +16,17 @@ class WordList < ApplicationRecord
   belongs_to :user
 
   validates :words, presence: true
+
+  # check if the words have a correct translated true/false value
+  # by checking if the word is translated by the user
+  def resync_translated_words
+    old_words = user.active_words_parsed
+
+    new_words = old_words.map do |word|
+      word[:translated] = Translation.exists?(user_id: user.id, word_id: word[:id])
+      word
+    end
+
+    update!(words: new_words)
+  end
 end
