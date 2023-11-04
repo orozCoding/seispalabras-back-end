@@ -33,6 +33,11 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test 'render translated words for user' do
+    # create a translation for the user
+    Words.list.sample(5).each do |word|
+      @user.translations.create!(used_word: word[:s].sample, word_id: word[:id])
+    end
+
     get :user_translated_words, as: :json
     assert_response :success
     assert_equal JSON(@user.translated_words), response.body
