@@ -22,7 +22,7 @@ class Translation < ApplicationRecord
   validate :used_word_is_correct_for_word_id
 
   after_create :resync_user_active_word_list
-  before_destroy :resync_user_active_word_list
+  after_destroy :resync_user_active_word_list
 
   def word
     Words.list.find { |word_hash| word_hash[:id] == word_id && remove_accent_from_array(word_hash[:s]).include?(remove_accent(used_word)) }
