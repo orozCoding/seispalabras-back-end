@@ -48,6 +48,7 @@ class User < ApplicationRecord
 
   # return the words of the active word list
   def active_words
+    active_word_list.resync_translated_words
     active_word_list.words
   end
 
