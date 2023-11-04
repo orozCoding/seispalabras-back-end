@@ -34,21 +34,20 @@ class User < ApplicationRecord
   def active_word_list
     # check if user has a word_list and if it was created today
     if self.word_list && self.word_list.updated_at.to_date == Time.now.utc.to_date
-      self.word_list
+      self.word_list.resync_translated_words
     elsif self.word_list
       self.word_list.update!(words: Words.new_list_for(self))
-      self.word_list
+      self.word_list.resync_translated_words
     else
       # if not, create a new word_list
       word_list = WordList.new(user_id: id, words: Words.new_list_for(self))
       word_list.save!
-      word_list
+      word_list.resync_translated_words
     end
   end
 
   # return the words of the active word list
   def active_words
-    active_word_list.resync_translated_words
     active_word_list.words
   end
 

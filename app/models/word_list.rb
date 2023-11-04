@@ -28,5 +28,6 @@ class WordList < ApplicationRecord
     end
 
     update!(words: new_words)
+    self
   end
 end
