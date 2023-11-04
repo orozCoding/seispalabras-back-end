@@ -27,6 +27,11 @@ class Translation < ApplicationRecord
     Words.list.find { |word_hash| word_hash[:id] == word_id && remove_accent_from_array(word_hash[:s]).include?(remove_accent(used_word)) }
   end
 
+  # return array of other possible used_words for the english word
+  def alternative_answers
+    word[:s].reject { |word| word == used_word }
+  end
+
   private
 
     def used_word_is_correct_for_word_id

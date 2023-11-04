@@ -58,7 +58,13 @@ class User < ApplicationRecord
   end
 
   def translated_words
-    Words.translated_by(self)
+    translations.map do |translation|
+      {
+        word_id: translation.word[:id],
+        used_word: translation.used_word,
+        alternative_answers: translation.alternative_answers
+      }
+    end
   end
 
   def create_word_list
