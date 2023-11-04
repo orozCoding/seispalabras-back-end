@@ -1,5 +1,4 @@
 class TranslationsController < ApplicationController
-  before_action :find_translation, only: %i[ show update destroy ]
   before_action :authorize_request, except: :top
 
   # GET /translations
@@ -16,7 +15,7 @@ class TranslationsController < ApplicationController
     @translation = @current_user.translations.new(translation_params)
 
     if @translation.save
-      render json: @translation, status: :created, location: @translation
+      render json: @translation, status: :created
     else
       render json: @translation.errors, status: :unprocessable_entity
     end
