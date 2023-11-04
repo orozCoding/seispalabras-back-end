@@ -24,7 +24,7 @@ class Translation < ApplicationRecord
   after_create :translate_word_in_user_list
 
   def word
-    Words.list.find { |word_hash| word_hash[:id] == word_id && word_hash[:s].include?(used_word) }
+    Words.list.find { |word_hash| word_hash[:id] == word_id && remove_accent_from_array(word_hash[:s]).include?(remove_accent(used_word)) }
   end
 
   private
@@ -45,5 +45,14 @@ class Translation < ApplicationRecord
       end
 
       user.reload.word_list.update!(words: new_words)
+    end
+
+    # remove accent marks from a word (á, é, í, ó, ú)
+    def remove_accent(word)
+      word.gsub(/[á]/, 'a').gsub(/[é]/, 'e').gsub(/[í]/, 'i').gsub(/[ó]/, 'o').gsub(/[ú]/, 'u')
+    end
+
+    def remove_accent_from_array(array)
+      array.map { |word| remove_accent(word) }
     end
 end
