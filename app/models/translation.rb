@@ -43,9 +43,9 @@ class Translation < ApplicationRecord
       user.word_list.resync_translated_words
     end
 
-    # remove accent marks from a word (á, é, í, ó, ú)
+    # remove accent marks from a word (á, é, í, ó, ú) and the ñ
     def remove_accent(word)
-      word.gsub(/[á]/, 'a').gsub(/[é]/, 'e').gsub(/[í]/, 'i').gsub(/[ó]/, 'o').gsub(/[ú]/, 'u')
+      word.gsub(/[á]/, 'a').gsub(/[é]/, 'e').gsub(/[í]/, 'i').gsub(/[ó]/, 'o').gsub(/[ú]/, 'u').gsub(/[ñ]/, 'n')
     end
 
     def remove_accent_from_array(array)
