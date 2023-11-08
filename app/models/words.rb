@@ -9,8 +9,8 @@ class Words
 
   # Return a random list of words that the user has not translated yet
   def self.new_list_for(user)
-    translated_ids = user.translations.pluck(:id)
-    list.select { |word| !translated_ids.include?(word[:id]) }.sample(6)
+    translated_ids = user.translations.pluck(:word_id)
+    list.select { |word| translated_ids.exclude?(word[:id]) }.sample(6)
   end
 
   def self.translated_by(user)
